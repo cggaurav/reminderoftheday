@@ -15,9 +15,8 @@ let reminders = []
  
 fs.createReadStream(REMINDERS_FILE)
 	.pipe(csv())
-	.on('data', (data) => {
-		console.log(data)
-    	reminders.push(data)
+	.on('data', (log) => {
+		reminders.push(log)
 	})
 	.on('error', (err) => {
 		throw err
