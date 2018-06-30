@@ -12,4 +12,12 @@ Send a PR to [this CSV file](data/reminders.csv) with your quote and your handle
 
 ## How do I follow these reminders?
 
-Follow on [Twitter](http://twiter.com/remindertoday)
+Follow on [Twitter](http://twitter.com/remindertoday)
+
+## How do I run my own copy of this?
+
+1. Clone the project
+2. Edit the reminders to be your own
+3. Create a [Twitter app](https://apps.twitter.com/) and get these variables, `TWITTER_CONSUMER_KEY, TWITTER_CONSUMER_SECRET, TWITTER_TOKEN_KEY, TWITTER_TOKEN_SECRET`
+4. Create a [Heroku](http://heroku.com/) account and `git push heroku master`. Set the ENVs above for your Heroku app.
+
