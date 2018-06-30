@@ -8,7 +8,7 @@ At school, just after classes began, we had a 5 minute reminder with a thoughtfu
 
 ## How can I add my favorite quotes?
 
-Send a PR to [this CSV file](reminders.csv) with your quote and your handles.
+Send a PR to [this CSV file](data/reminders.csv) with your quote and your handles.
 
 ## How do I follow these reminders?
 
