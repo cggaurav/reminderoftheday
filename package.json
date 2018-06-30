@@ -1,0 +1,37 @@
+{
+    "name": "reminder-of-the-day",
+    "version": "0.0.1",
+    "description": "A sample Node.js app using Express 4",
+    "engines": {
+        "node": "8.9.1"
+    },
+    "main": "app.js",
+    "scripts": {
+        "start": "node app.js",
+        "test": "node test/validate.js"
+    },
+    "dependencies": {
+        "csv-parser": "^1.12.1",
+        "twitter": "^1.7.1"
+    },
+    "devDependencies": {
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/cggaurav/reminderoftheday.git"
+    },
+    "keywords": [
+        "node",
+        "heroku",
+        "express"
+    ],
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/cggaurav/reminderoftheday/issues"
+    },
+    "homepage": "https://github.com/cggaurav/reminderoftheday#readme",
+    "directories": {
+        "test": "test"
+    },
+    "author": "Gaurav C"
+}
