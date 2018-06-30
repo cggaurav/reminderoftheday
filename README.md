@@ -1,4 +1,5 @@
-# Reminder of the Day
+# Reminder of the Day [![Build Status](https://travis-ci.com/cggaurav/reminderoftheday.svg?branch=master)](https://travis-ci.com/cggaurav/reminderoftheday)
+
 A reminder of quotes worth sharing.
 
 ## Why?

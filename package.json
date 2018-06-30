@@ -14,8 +14,7 @@
         "csv-parser": "^1.12.1",
         "twitter": "^1.7.1"
     },
-    "devDependencies": {
-    },
+    "devDependencies": {},
     "repository": {
         "type": "git",
         "url": "git+https://github.com/cggaurav/reminderoftheday.git"
