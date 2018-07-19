@@ -26,7 +26,7 @@ fs.createReadStream(REMINDERS_FILE)
 
 		console.log('Tweeting...')
 
-		twitter.post('statuses/update', { status: [reminder.quote.trim(), reminder.who.trim()].join(' ') } )
+		twitter.post('statuses/update', { status: [reminder.quote.trim(), reminder.who.trim(), '#quote'].join(' ') } )
 		  	.catch((err) => {
 		    	throw err
 		  	})
