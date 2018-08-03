@@ -7,7 +7,7 @@ fs.createReadStream(REMINDERS_FILE)
 	.pipe(csv())
 	.on('data', (log) => {
 		// 5 for the hash tag
-		if (log.quote.trim().length + 5 + log.who.trim().length > 280) {
+		if (log.quote.trim().length + 13 + log.who.trim().length > 280) {
     		// This should exit as failure
     		throw new Error(`${JSON.stringify(log)} is too big to tweet`)
     	}
