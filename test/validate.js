@@ -1,20 +1,26 @@
-const csv = require('csv-parser')
-const fs = require('fs')
+const got = require('got')
 
-const REMINDERS_FILE = 'data/reminders.csv'
- 
-fs.createReadStream(REMINDERS_FILE)
-	.pipe(csv())
-	.on('data', (log) => {
-		// 5 for the hash tag
-		if (log.quote.trim().length + 13 + log.who.trim().length > 280) {
-    		// This should exit as failure
-    		throw new Error(`${JSON.stringify(log)} is too big to tweet`)
-    	}
-	})
-	.on('error', (err) => {
+const SHEET_ID = process.env.SHEET_ID
+const SHEET_URL = `https://spreadsheets.google.com/feeds/list/${SHEET_ID}/od6/public/values?alt=json`
+
+got(SHEET_URL, { json: true })
+.then(response => {
+	try {
+		let reminders = response.body.feed.entry
+
+		reminders.forEach((reminder) => {
+			// All characters
+			if (reminder['gsx$quote']['$t'].trim().length + 13 + reminder['gsx$who']['$t'].trim().length > 280) {
+				throw new Error(`${JSON.stringify(reminder)} is too big to tweet`)
+			}
+		})
+
+		console.log('Done.')
+
+	} catch (err) {
 		throw err
-	})
-	.on('end', () => {
-		process.exit(0)
-	})
+	}
+})
+.catch(err => {
+	throw err
+})
