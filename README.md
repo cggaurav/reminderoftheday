@@ -8,7 +8,7 @@ At school, just after classes began, we had a 5 minute reminder with a thoughtfu
 
 ## How can I add my favorite quotes?
 
-Send a PR to [this CSV file](data/reminders.csv) with your quote and your handles.
+Send one anonymously [here](https://docs.google.com/forms/d/e/1FAIpQLScZv-_nOwBDbY4OkRPJfXRbN_zLEZvZ5QuTIrAykl-ViDXPZg/viewform)
 
 ## How do I follow these reminders?
 
