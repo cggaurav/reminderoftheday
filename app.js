@@ -9,27 +9,22 @@ const twitter = new Twitter({
 	access_token_secret: process.env.TWITTER_TOKEN_SECRET
 })
 
-const SHEET_ID = process.env.SHEET_ID
-const SHEET_URL = `https://spreadsheets.google.com/feeds/list/${SHEET_ID}/od6/public/values?alt=json`
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
 
-// HOW: https://coderwall.com/p/duapqq/use-a-google-spreadsheet-as-your-json-backend
+const SHEET_ID = process.env.SHEET_ID
+const SHEET_URL = `https://opensheet.vercel.app/${SHEET_ID}/1`
 
 got(SHEET_URL, { json: true })
 .then(response => {
-	try {
-		let reminders = response.body.feed.entry
-		let reminder = reminders[Math.floor(Math.random() * reminders.length) + 1]
+	let reminders = response.body
+	// console.log(`We have ${reminders.length} reminders`)
+	let reminder = reminders[Math.floor(Math.random() * reminders.length) + 1]
 
-		console.log(`Tweeting .. "${reminder['gsx$quote']['$t']} ${reminder['gsx$who']['$t']}"`)
+	console.log(`Tweeting .. "${reminder['QUOTE']} ${reminder['WHO']}"`)
 
-		twitter.post('statuses/update', { status: [reminder['gsx$quote']['$t'].trim(), reminder['gsx$who']['$t'].trim(), '#day', "#reminder"].join(' ') } )
-		  	.catch((err) => {
-		    	throw err
-		  	})
-	} catch (err) {
-		throw err
-	}
+	twitter.post('statuses/update', { status: [reminder['QUOTE'].trim(), reminder['WHO'].trim(), '#day', "#reminder"].join(' ') } )
 })
-.catch(err => {
+.catch((err) => {
+	console.err(err)
 	throw err
 })
