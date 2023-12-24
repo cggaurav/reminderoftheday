@@ -1,23 +1,26 @@
-const express = require('express');
+const express = require('express')
 const http = require('http')
-const Twitter = require('twitter')
 const fs = require('fs')
-const got = require('got');
+const got = require('got')
+
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
+
+const { TwitterApi } = require('twitter-api-v2')
+const SHEET_ID = process.env.SHEET_ID
+const SHEET_URL = `https://opensheet.vercel.app/${SHEET_ID}/1`
+
+const client = new TwitterApi({
+	appKey: process.env.TWITTER_CONSUMER_KEY,
+	appSecret: process.env.TWITTER_CONSUMER_SECRET,
+	accessToken: process.env.TWITTER_TOKEN_KEY,
+	accessSecret: process.env.TWITTER_TOKEN_SECRET
+});
+
+const rwClient = client.readWrite;
 
 let app = express();
 app.set('port', process.env.PORT || 3000)
 
-const SHEET_ID = process.env.SHEET_ID
-const SHEET_URL = `https://opensheet.vercel.app/${SHEET_ID}/1`
-
-const twitter = new Twitter({
-	consumer_key: process.env.TWITTER_CONSUMER_KEY,
-	consumer_secret: process.env.TWITTER_CONSUMER_SECRET,
-	access_token_key: process.env.TWITTER_TOKEN_KEY,
-	access_token_secret: process.env.TWITTER_TOKEN_SECRET
-})
-
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0'
 
 app.get('/api', (req, res) => {
 	got(SHEET_URL, { json: true })
@@ -28,15 +31,15 @@ app.get('/api', (req, res) => {
 
 			console.log(`Tweeting .. "${reminder['QUOTE']} ${reminder['WHO']}"`)
 
-			twitter.post('statuses/update', { status: [reminder['QUOTE'].trim(), reminder['WHO'].trim(), '#day', "#reminder"].join(' ') })
-				.then((s) => {
-					console.log(`Tweeting .. `, s)
+			rwClient.v2.tweet([reminder['QUOTE'].trim(), reminder['WHO'].trim(), '#day', "#reminder"].join(' '))
+				.then(response => {
+					console.log('Tweeted:', response.data);
 					res.end(`Hello! Go to item: <a href="${path}">${path}</a>`);
 				})
-				.catch((e) => {
-					console.log('We have an error', e)
+				.catch(error => {
+					console.error('Error:', error);
 					res.end(`Err ${e}`);
-				})
+				});
 
 		})
 		.catch((err) => {
