@@ -11,10 +11,10 @@
         "test": "node test/validate.js"
     },
     "dependencies": {
+        "express": "^4.18.2",
         "got": "^9.2.0",
         "twitter": "^1.7.1"
     },
-    "devDependencies": {},
     "repository": {
         "type": "git",
         "url": "git+https://github.com/cggaurav/reminderoftheday.git"
