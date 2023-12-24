@@ -34,11 +34,11 @@ app.get('/api', (req, res) => {
 			rwClient.v2.tweet([reminder['QUOTE'].trim(), reminder['WHO'].trim(), '#day', "#reminder"].join(' '))
 				.then(response => {
 					console.log('Tweeted:', response.data);
-					res.end(`Hello! Go to item: <a href="${path}">${path}</a>`);
+					res.end(`Done #${JSON.stringify(response.data)}`);
 				})
 				.catch(error => {
 					console.error('Error:', error);
-					res.end(`Err ${e}`);
+					res.end(`Err ${error.message}`);
 				});
 
 		})
